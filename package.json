@@ -1,9 +1,8 @@
 {
   "name": "ember-cli-daterangepicker",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Ember CLI date range picker component",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -11,11 +10,10 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Josemar Luedke <josemarluedke@gmail.com> (http://josemarluedke.com/)",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
@@ -39,5 +37,14 @@
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josemarluedke/ember-cli-daterangepicker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/josemarluedke/ember-cli-daterangepicker/issues"
+  },
+  "homepage": "https://github.com/josemarluedke/ember-cli-daterangepicker"
 }
