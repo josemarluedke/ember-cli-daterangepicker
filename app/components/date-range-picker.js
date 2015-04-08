@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   attributeBindings: ['start', 'end'],
   start: null,
   end: null,
+  timePicker: false,
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
   rangeText: function() {
@@ -25,6 +26,7 @@ export default Ember.Component.extend({
       format: format,
       startDate: this.get('start'),
       endDate: this.get('end'),
+      timePicker: this.get('timePicker'),
       ranges: {
         Today: [moment(), moment()],
         Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
