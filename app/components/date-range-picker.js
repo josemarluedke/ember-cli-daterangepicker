@@ -14,6 +14,7 @@ export default Ember.Component.extend({
       return moment(this.get('start')).format(format) + " - " + moment(this.get('end')).format(format);
     }
   }.property('start', 'end'),
+  opens: "left",
 
   didInsertElement: function() {
     var self = this;
@@ -34,7 +35,8 @@ export default Ember.Component.extend({
         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
         'This Month': [moment().startOf('month'), moment().endOf('month')],
         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      }
+      },
+      opens: this.get("opens")
     });
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
       self.set('start', picker.startDate.format(self.get('serverFormat')));
