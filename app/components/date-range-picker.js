@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     }
   }.property('start', 'end'),
   opens: "left",
-
+  placeholder: "",
   didInsertElement: function() {
     var self = this;
     var format = this.get('format');
