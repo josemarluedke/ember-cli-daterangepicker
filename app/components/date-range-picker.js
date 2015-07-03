@@ -31,6 +31,8 @@ export default Ember.Component.extend({
     'This Month': [moment().startOf('month'), moment().endOf('month')],
     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
   },
+  removeDropdownOnDestroy: false,
+  cancelLabel: 'Clear',
 
   //Init the dropdown when the component is added to the DOM
   didInsertElement: function() {
@@ -38,7 +40,7 @@ export default Ember.Component.extend({
 
     this.$('.daterangepicker-input').daterangepicker({
       locale: {
-        cancelLabel: 'Clear'
+        cancelLabel: this.get('cancelLabel')
       },
       format: this.get('format'),
       startDate: this.get('start'),
@@ -71,6 +73,8 @@ export default Ember.Component.extend({
 
   //Remove the hidden dropdown when this component is destroyed
   willDestroy: function () {
-    $('.daterangepicker').remove();
+    if (this.get('removeDropdownOnDestroy')) {
+      Ember.$('.daterangepicker').remove();
+    }
   }
 });
