@@ -33,6 +33,8 @@ export default Ember.Component.extend({
   },
   removeDropdownOnDestroy: false,
   cancelLabel: 'Clear',
+  applyAction: null,
+  cancelAction: null,
 
   //Init the dropdown when the component is added to the DOM
   didInsertElement: function() {
@@ -56,13 +58,34 @@ export default Ember.Component.extend({
       opens: this.get('opens')
     });
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
-      self.set('start', picker.startDate.format(self.get('serverFormat')));
-      self.set('end', picker.endDate.format(self.get('serverFormat')));
+      var start = picker.startDate.format(self.get('serverFormat'));
+      var end = picker.endDate.format(self.get('serverFormat'));
+      var applyAction = self.get('applyAction');
+
+      if (applyAction) {
+        Ember.assert(
+          'applyAction for date-range-picker must be a function',
+          typeof applyAction === 'function'
+        );
+        applyAction(start, end);
+      } else {
+        self.setProperties({start, end});
+      }
     });
 
     this.$('.daterangepicker-input').on('cancel.daterangepicker', function() {
-      self.set('start', undefined);
-      self.set('end', undefined);
+      var cancelAction = self.get('cancelAction');
+
+      if (cancelAction) {
+        Ember.assert(
+          'cancelAction for date-range-picker must be a function',
+          typeof cancelAction === 'function'
+        );
+        cancelAction();
+      } else {
+        self.set('start', undefined);
+        self.set('end', undefined);
+      }
     });
 
     this.$('.daterangepicker-input').on('show.daterangepicker', function(ev, picker) {
