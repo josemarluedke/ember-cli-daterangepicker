@@ -6,6 +6,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('with-params');
+  this.route('without-params');
 });
 
 export default Router;
