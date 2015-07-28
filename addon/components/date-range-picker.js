@@ -2,18 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['form-group'],
-  attributeBindings: ['start', 'end'],
+  attributeBindings: ['start', 'end', 'serverFormat'],
   start: undefined,
   end: undefined,
   timePicker: false,
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed('start', 'end', function () {
+  rangeText: Ember.computed(function () {
     let format = this.get('format');
+    let serverFormat = this.get('serverFormat');
     let start = this.get('start');
     let end = this.get('end');
     if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
-      return moment(start).format(format) + this.get('separator') + moment(end).format(format);
+      return moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
     }
     return '';
   }),
@@ -22,7 +23,7 @@ export default Ember.Component.extend({
   separator: ' - ',
   singleDatePicker: false,
   placeholder: null,
-  buttonClasses: [],
+  buttonClasses: ['btn'],
   applyClass: null,
   cancelClass: null,
   ranges: {
@@ -34,7 +35,7 @@ export default Ember.Component.extend({
     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
   },
   removeDropdownOnDestroy: false,
-  cancelLabel: 'Clear',
+  cancelLabel: 'Cancel',
   applyAction: null,
   cancelAction: null,
 
@@ -42,13 +43,18 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     var self = this;
 
+    let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
+    let momentEndDate = moment(this.get('end'), this.get('serverFormat'));
+    let startDate = momentStartDate.isValid() ? momentStartDate : undefined;
+    let endDate = momentEndDate.isValid() ? momentEndDate : undefined;
+
     this.$('.daterangepicker-input').daterangepicker({
       locale: {
         cancelLabel: this.get('cancelLabel')
       },
       format: this.get('format'),
-      startDate: this.get('start'),
-      endDate: this.get('end'),
+      startDate: startDate,
+      endDate: endDate,
       timePicker: this.get('timePicker'),
       ranges: this.get('ranges'),
       buttonClasses: this.get('buttonClasses'),
@@ -59,6 +65,16 @@ export default Ember.Component.extend({
       drops: this.get('drops'),
       opens: this.get('opens')
     });
+
+    this.$('.daterangepicker-input').on('show.daterangepicker', function(ev, picker) {
+      let serverFormat = self.get(serverFormat);
+      let startDate = moment(self.get('start'), serverFormat);
+      let endDate = moment(self.get('end'), serverFormat);
+
+      picker.setStartDate(startDate);
+      picker.setEndDate(endDate);
+    });
+
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
       var start = picker.startDate.format(self.get('serverFormat'));
       var end = picker.endDate.format(self.get('serverFormat'));
@@ -85,15 +101,12 @@ export default Ember.Component.extend({
         );
         cancelAction();
       } else {
-        self.set('start', undefined);
-        self.set('end', undefined);
+        self.set('start', self.get('start'));
+        self.set('end', self.get('end'));
       }
     });
 
-    this.$('.daterangepicker-input').on('show.daterangepicker', function(ev, picker) {
-      picker.setStartDate(moment(self.get('start')));
-      picker.setEndDate(moment(self.get('end')));
-    });
+
   },
 
   //Remove the hidden dropdown when this component is destroyed

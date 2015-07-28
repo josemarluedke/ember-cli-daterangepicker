@@ -1,8 +1,7 @@
-<h2 id="title">Welcome to Ember.js</h2>
-
-<div>
-  {{date-range-picker}}
+<div class="container">
+  <h2 id="title">{{#link-to 'index'}}Welcome to Ember.js{{/link-to}}</h2>
+  {{link-to 'With-Params' 'with-params'}} |
+  {{link-to 'Without-Params' 'without-params'}}
+  <hr>
+  {{outlet}}
 </div>
-
-
-{{outlet}}
