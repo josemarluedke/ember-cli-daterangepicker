@@ -36,6 +36,7 @@ export default Ember.Component.extend({
 
   //Init the dropdown when the component is added to the DOM
   didInsertElement: function() {
+    this.input = this.$('input');
     var self = this;
 
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
@@ -110,6 +111,13 @@ export default Ember.Component.extend({
   willDestroy: function () {
     if (this.get('removeDropdownOnDestroy')) {
       Ember.$('.daterangepicker').remove();
+    }
+  },
+
+  actions: {
+    focusInput() {
+      this.set('active', true);
+      this.input.focus();
     }
   }
 });
