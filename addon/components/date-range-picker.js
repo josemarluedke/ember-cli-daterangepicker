@@ -21,20 +21,14 @@ export default Ember.Component.extend({
   }),
   opens: null,
   drops: null,
+  autoApply: false,
   separator: ' - ',
   singleDatePicker: false,
   placeholder: null,
   buttonClasses: ['btn'],
   applyClass: null,
   cancelClass: null,
-  ranges: {
-    'Today': [moment(), moment()],
-    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-    'This Month': [moment().startOf('month'), moment().endOf('month')],
-    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-  },
+  ranges: null,
   removeDropdownOnDestroy: false,
   cancelLabel: 'Cancel',
   applyAction: null,
@@ -42,6 +36,7 @@ export default Ember.Component.extend({
 
   //Init the dropdown when the component is added to the DOM
   didInsertElement: function() {
+    this.input = this.$('input');
     var self = this;
 
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
@@ -51,8 +46,10 @@ export default Ember.Component.extend({
 
     this.$('.daterangepicker-input').daterangepicker({
       locale: {
-        cancelLabel: this.get('cancelLabel')
+        cancelLabel: this.get('cancelLabel'),
+        format: this.get('format')
       },
+      autoApply: this.get('autoApply'),
       format: this.get('format'),
       startDate: startDate,
       endDate: endDate,
@@ -114,6 +111,13 @@ export default Ember.Component.extend({
   willDestroy: function () {
     if (this.get('removeDropdownOnDestroy')) {
       Ember.$('.daterangepicker').remove();
+    }
+  },
+
+  actions: {
+    focusInput() {
+      this.set('active', true);
+      this.input.focus();
     }
   }
 });
