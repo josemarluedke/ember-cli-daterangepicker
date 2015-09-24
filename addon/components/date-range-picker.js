@@ -6,6 +6,8 @@ export default Ember.Component.extend({
   attributeBindings: ['start', 'end', 'serverFormat'],
   start: undefined,
   end: undefined,
+  minDate: undefined,
+  maxDate: undefined,
   timePicker: false,
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
@@ -49,6 +51,11 @@ export default Ember.Component.extend({
     let startDate = momentStartDate.isValid() ? momentStartDate : undefined;
     let endDate = momentEndDate.isValid() ? momentEndDate : undefined;
 
+    let momentMinDate = moment(this.get('minDate'), this.get('serverFormat'));
+    let momentMaxDate = moment(this.get('maxDate'), this.get('serverFormat'));
+    let minDate = momentMinDate.isValid() ? momentMinDate : undefined;
+    let maxDate = momentMaxDate.isValid() ? momentMaxDate : undefined;
+
     this.$('.daterangepicker-input').daterangepicker({
       locale: {
         cancelLabel: this.get('cancelLabel')
@@ -56,6 +63,8 @@ export default Ember.Component.extend({
       format: this.get('format'),
       startDate: startDate,
       endDate: endDate,
+      minDate: minDate,
+      maxDate: maxDate,
       timePicker: this.get('timePicker'),
       ranges: this.get('ranges'),
       buttonClasses: this.get('buttonClasses'),
