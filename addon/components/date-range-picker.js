@@ -58,9 +58,9 @@ export default Ember.Component.extend({
 
     this.$('.daterangepicker-input').daterangepicker({
       locale: {
-        cancelLabel: this.get('cancelLabel')
+        cancelLabel: this.get('cancelLabel'),
+        format: this.get('format')
       },
-      format: this.get('format'),
       startDate: startDate,
       endDate: endDate,
       minDate: minDate,
