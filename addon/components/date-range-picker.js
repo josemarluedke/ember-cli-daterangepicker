@@ -76,15 +76,6 @@ export default Ember.Component.extend({
       opens: this.get('opens')
     });
 
-    this.$('.daterangepicker-input').on('show.daterangepicker', function(ev, picker) {
-      let serverFormat = self.get('serverFormat');
-      let startDate = moment(self.get('start'), serverFormat);
-      let endDate = moment(self.get('end'), serverFormat);
-
-      picker.setStartDate(startDate);
-      picker.setEndDate(endDate);
-    });
-
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
       var start = picker.startDate.format(self.get('serverFormat'));
       var end = picker.endDate.format(self.get('serverFormat'));
@@ -115,8 +106,6 @@ export default Ember.Component.extend({
         self.set('end', self.get('end'));
       }
     });
-
-
   },
 
   //Remove the hidden dropdown when this component is destroyed
