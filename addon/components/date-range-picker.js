@@ -9,6 +9,13 @@ export default Ember.Component.extend({
   minDate: undefined,
   maxDate: undefined,
   timePicker: false,
+  timePicker24Hour: false,
+  timePickerSeconds: false,
+  timePickerIncrement: undefined,
+  showWeekNumbers: false,
+  showDropdowns: false,
+  linkedCalendars: false,
+
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
   rangeText: Ember.computed(function () {
@@ -73,7 +80,13 @@ export default Ember.Component.extend({
       separator: this.get('separator'),
       singleDatePicker: this.get('singleDatePicker'),
       drops: this.get('drops'),
-      opens: this.get('opens')
+      opens: this.get('opens'),
+      timePicker24Hour: this.get('timePicker24Hour'),
+      timePickerSeconds: this.get('timePickerSeconds'),
+      timePickerIncrement: this.get('timePickerIncrement'),
+      showWeekNumbers: this.get('showWeekNumbers'),
+      showDropdowns: this.get('showDropdowns'),
+      linkedCalendars: this.get('linkedCalendars')
     });
 
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
