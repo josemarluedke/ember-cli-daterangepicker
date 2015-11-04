@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed(function () {
+  rangeText: Ember.computed('start', 'end', function () {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
