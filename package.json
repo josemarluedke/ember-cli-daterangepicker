@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-daterangepicker",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Ember CLI date range picker component",
   "directories": {
     "test": "tests"
