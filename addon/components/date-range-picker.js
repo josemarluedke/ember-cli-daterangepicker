@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed('start', 'end', function () {
+  rangeText: Ember.computed('start', 'end', function() {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
@@ -48,6 +48,8 @@ export default Ember.Component.extend({
   cancelLabel: 'Cancel',
   applyAction: null,
   cancelAction: null,
+  autoUpdateInput: true,
+  autoApply: false,
 
   //Init the dropdown when the component is added to the DOM
   didInsertElement: function() {
@@ -63,7 +65,9 @@ export default Ember.Component.extend({
     let minDate = momentMinDate.isValid() ? momentMinDate : undefined;
     let maxDate = momentMaxDate.isValid() ? momentMaxDate : undefined;
 
-    this.$('.daterangepicker-input').daterangepicker({
+    let options = {
+      autoUpdateInput: this.get('autoUpdateInput'),
+      autoApply: this.get('autoApply'),
       locale: {
         cancelLabel: this.get('cancelLabel'),
         format: this.get('format')
@@ -73,7 +77,6 @@ export default Ember.Component.extend({
       minDate: minDate,
       maxDate: maxDate,
       timePicker: this.get('timePicker'),
-      ranges: this.get('ranges'),
       buttonClasses: this.get('buttonClasses'),
       applyClass: this.get('applyClass'),
       cancelClass: this.get('cancelClass'),
@@ -87,7 +90,13 @@ export default Ember.Component.extend({
       showWeekNumbers: this.get('showWeekNumbers'),
       showDropdowns: this.get('showDropdowns'),
       linkedCalendars: this.get('linkedCalendars')
-    });
+    };
+
+    if (this.get('singleDatePicker') === undefined) {
+      options.ranges = this.get('ranges');
+    }
+
+    this.$('.daterangepicker-input').daterangepicker(options);
 
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
       var start = picker.startDate.format(self.get('serverFormat'));
@@ -101,7 +110,9 @@ export default Ember.Component.extend({
         );
         applyAction(start, end);
       } else {
-        self.setProperties({start, end});
+        self.setProperties({
+          start, end
+        });
       }
     });
 
@@ -122,7 +133,7 @@ export default Ember.Component.extend({
   },
 
   //Remove the hidden dropdown when this component is destroyed
-  willDestroy: function () {
+  willDestroy: function() {
     if (this.get('removeDropdownOnDestroy')) {
       Ember.$('.daterangepicker').remove();
     }
