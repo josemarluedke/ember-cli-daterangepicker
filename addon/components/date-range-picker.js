@@ -15,6 +15,7 @@ export default Ember.Component.extend({
   showWeekNumbers: false,
   showDropdowns: false,
   linkedCalendars: false,
+  parentEl: 'body',
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
@@ -89,7 +90,8 @@ export default Ember.Component.extend({
       timePickerIncrement: this.get('timePickerIncrement'),
       showWeekNumbers: this.get('showWeekNumbers'),
       showDropdowns: this.get('showDropdowns'),
-      linkedCalendars: this.get('linkedCalendars')
+      linkedCalendars: this.get('linkedCalendars'),
+      parentEl: this.get('parentEl')
     };
 
     if (!this.get('singleDatePicker')) {
