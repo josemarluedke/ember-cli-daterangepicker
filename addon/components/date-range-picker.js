@@ -98,7 +98,9 @@ export default Ember.Component.extend({
       options.ranges = this.get('ranges');
     }
 
-    this.$('.daterangepicker-input').daterangepicker(options);
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.$('.daterangepicker-input').daterangepicker(options);
+    });
 
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
       var start = picker.startDate.format(self.get('serverFormat'));
