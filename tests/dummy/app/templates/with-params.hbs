@@ -1,5 +1,11 @@
 
 <h4>With Params</h4>
 <div>
-  {{date-range-picker start="20140101" end="20141231" serverFormat="YYYYMMDD"}}
+  {{date-range-picker
+    start="20140101"
+    end="20141231"
+    serverFormat="YYYYMMDD"
+    applyAction=(action "apply")
+    cancelAction=(action "cancel")
+  }}
 </div>
