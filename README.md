@@ -6,8 +6,6 @@ Just a simple component to use [bootstrap-daterangepicker](https://github.com/da
 
 ## Installation
 
-Install [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker) and [ember-moment](https://github.com/stefanpenner/ember-moment), they are dependencies.
-
 * `ember install:addon ember-cli-daterangepicker`
 
 ## Usage
