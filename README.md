@@ -6,16 +6,25 @@ Just a simple component to use [bootstrap-daterangepicker](https://github.com/da
 
 ## Installation
 
-* `ember install:addon ember-cli-daterangepicker`
+```
+ember install ember-cli-daterangepicker
+```
 
 ## Usage
 
 ```handlebars
-{{date-range-picker label='Creation Date' start=betweenCreatedAtStartsAt end=betweenCreatedAtEndsAt}}
+{{date-range-picker
+  label='Optional label'
+  start="20150101"
+  end="20151231"
+}}
 ```
+
+This addon supports many of the same options as the [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker) library. These options are documented here: [http://www.daterangepicker.com/#options](http://www.daterangepicker.com/#options). Open up an issue if you find an option that does not work with this addon.
 
 ## Running Tests
 
+* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
