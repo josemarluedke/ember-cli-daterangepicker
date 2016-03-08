@@ -25,7 +25,8 @@ export default Ember.Component.extend({
     let start = this.get('start');
     let end = this.get('end');
     if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
-      return moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
+      return moment(start, serverFormat).format(format) + this.get('separator') +
+        moment(end, serverFormat).format(format);
     }
     return '';
   }),
@@ -52,9 +53,9 @@ export default Ember.Component.extend({
   autoUpdateInput: true,
   autoApply: false,
 
-  //Init the dropdown when the component is added to the DOM
-  didInsertElement: function() {
-    var self = this;
+  // Init the dropdown when the component is added to the DOM
+  didInsertElement() {
+    let self = this;
 
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
     let momentEndDate = moment(this.get('end'), this.get('serverFormat'));
@@ -103,9 +104,9 @@ export default Ember.Component.extend({
     });
 
     this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
-      var start = picker.startDate.format(self.get('serverFormat'));
-      var end = picker.endDate.format(self.get('serverFormat'));
-      var applyAction = self.get('applyAction');
+      let start = picker.startDate.format(self.get('serverFormat'));
+      let end = picker.endDate.format(self.get('serverFormat'));
+      let applyAction = self.get('applyAction');
 
       if (applyAction) {
         Ember.assert(
@@ -121,7 +122,7 @@ export default Ember.Component.extend({
     });
 
     this.$('.daterangepicker-input').on('cancel.daterangepicker', function() {
-      var cancelAction = self.get('cancelAction');
+      let cancelAction = self.get('cancelAction');
 
       if (cancelAction) {
         Ember.assert(
@@ -130,14 +131,16 @@ export default Ember.Component.extend({
         );
         self.sendAction('cancelAction');
       } else {
-        self.set('start', self.get('start'));
-        self.set('end', self.get('end'));
+        self.setProperties({
+          start: self.get('start'),
+          end: self.get('end')
+        });
       }
     });
   },
 
-  //Remove the hidden dropdown when this component is destroyed
-  willDestroy: function() {
+  // Remove the hidden dropdown when this component is destroyed
+  willDestroy() {
     if (this.get('removeDropdownOnDestroy')) {
       Ember.$('.daterangepicker').remove();
     }
