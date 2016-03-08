@@ -30,6 +30,6 @@ Just a simple component to use [bootstrap-daterangepicker](https://github.com/da
 
 # License
 
-Copyright (c) 2015 Josemar Luedke
+Copyright (c) 2015-2016 Josemar Luedke
 
 Licensed under the [MIT license](LICENSE.md).
