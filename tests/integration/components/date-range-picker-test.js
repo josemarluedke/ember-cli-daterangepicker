@@ -43,6 +43,18 @@ test('input renders with applyAction and cancelAction parameters', function (ass
   assert.equal(this.$('.daterangepicker-input').length, 1, 'did not render');
 });
 
+test('input renders empty with autoUpdateInput parameter', function (assert) {
+  assert.expect(1);
+
+  this.render(hbs `
+    {{date-range-picker
+      autoUpdateInput=false
+    }}
+  `);
+
+  assert.equal(this.$('.daterangepicker-input').val(), '', 'input is not empty');
+});
+
 test('dropdown menu renders', function (assert) {
   assert.expect(1);
 
