@@ -53,6 +53,8 @@ export default Ember.Component.extend({
   cancelAction: null,
   autoUpdateInput: true,
   autoApply: false,
+  alwaysShowCalendars: false,
+  firstDay: 0,
 
   // Init the dropdown when the component is added to the DOM
   didInsertElement() {
@@ -69,11 +71,13 @@ export default Ember.Component.extend({
     let maxDate = momentMaxDate.isValid() ? momentMaxDate : undefined;
 
     let options = {
+      alwaysShowCalendars: this.get('alwaysShowCalendars'),
       autoUpdateInput: this.get('autoUpdateInput'),
       autoApply: this.get('autoApply'),
       locale: {
         cancelLabel: this.get('cancelLabel'),
-        format: this.get('format')
+        format: this.get('format'),
+        firstDay: this.get('firstDay')
       },
       startDate: startDate,
       endDate: endDate,
