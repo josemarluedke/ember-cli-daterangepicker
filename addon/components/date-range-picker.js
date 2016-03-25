@@ -42,26 +42,6 @@ export default Ember.Component.extend({
     this.set('rangeText', rangeText);
   },
 
-
-  // rangeText: Ember.computed('start', 'end', function() {
-  //   let format = this.get('format');
-  //   let serverFormat = this.get('serverFormat');
-  //   let start = this.get('start');
-  //   let end = this.get('end');
-  //   if (this.get('singleDatePicker')) {
-  //     if (!Ember.isEmpty(start)) {
-  //       return moment(start, serverFormat).format(format);
-  //     } else {
-  //       return '';
-  //     }
-  //   } else {
-  //     if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
-  //       return moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
-  //     } else {
-  //       return '';
-  //     }
-  //   }
-  // }),
   opens: null,
   drops: null,
   separator: ' - ',
