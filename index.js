@@ -10,12 +10,14 @@ module.exports = {
   included: function(app) {
     this._super.included.apply(this, arguments);
 
-    var daterangepickerPath = path.dirname(require.resolve('bootstrap-daterangepicker'));
-    this.options = { daterangepickerPath: daterangepickerPath };
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      var daterangepickerPath = path.dirname(require.resolve('bootstrap-daterangepicker'));
+      this.options = { daterangepickerPath: daterangepickerPath };
 
-    var vendor = this.treePaths.vendor;
-    this.app.import(vendor + '/bootstrap-daterangepicker/daterangepicker.js');
-    this.app.import(vendor + '/bootstrap-daterangepicker/daterangepicker.css');
+      var vendor = this.treePaths.vendor;
+      this.app.import(vendor + '/bootstrap-daterangepicker/daterangepicker.js');
+      this.app.import(vendor + '/bootstrap-daterangepicker/daterangepicker.css');
+    }
   },
 
   treeForVendor: function(vendorTree) {
