@@ -20,17 +20,29 @@ export default Ember.Component.extend({
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed('start', 'end', function() {
+
+  rangesChanged: Ember.observer('start', 'end', function() {
+    Ember.run.once(this, 'setRangeText');
+  }),
+
+  setRangeText() {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
     let end = this.get('end');
-    if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
-      return moment(start, serverFormat).format(format) + this.get('separator') +
-        moment(end, serverFormat).format(format);
+    let rangeText = '';
+    if (this.get('singleDatePicker')) {
+      if (!Ember.isEmpty(start)) {
+        rangeText = moment(start, serverFormat).format(format);
+      }
+    } else {
+      if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
+        return moment(start, serverFormat).format(format) + this.get('separator') + moment(end, serverFormat).format(format);
+      }
     }
-    return '';
-  }),
+    this.set('rangeText', rangeText);
+  },
+
   opens: null,
   drops: null,
   separator: ' - ',
