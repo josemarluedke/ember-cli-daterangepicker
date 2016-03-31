@@ -130,3 +130,40 @@ test('calendar renders with expected date parameters', function (assert) {
     done();
   }, ASYNC_WAIT_TIME);
 });
+
+test('moment objects are supported for start and end attributes.', function (assert) {
+  assert.expect(4);
+
+  let start = moment().subtract(3, 'days');
+  let end = moment().subtract(1, 'days');
+  let done = assert.async();
+
+  this.set('start', start);
+  this.set('end', end);
+
+  this.render(hbs `
+    <div id="wrapper">
+    {{date-range-picker
+      start=end
+      end=end
+      parentEl="#wrapper"
+    }}</div>
+  `);
+
+  assert.equal(this.get('end')._isAMomentObject, true, 'end starts as a moment object');
+  assert.equal(this.get('start')._isAMomentObject, true, 'start starts as a moment object');
+
+  run.later(() => {
+    this.$('.daterangepicker-input').click();
+    this.$('.dropdown-menu .ranges ul > li:nth-child(5)').click();
+  });
+
+  run.later(() => {
+
+    assert.equal(this.get('end')._isAMomentObject, true, 'end is still a moment object');
+    assert.equal(this.get('start')._isAMomentObject, true, 'start is still a moment object');
+
+    done();
+  }, ASYNC_WAIT_TIME);
+
+});
