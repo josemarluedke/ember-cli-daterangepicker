@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import moment from 'moment';
 
+const {
+  run,
+  isEmpty,
+  computed
+} = Ember;
+
 export default Ember.Component.extend({
   classNames: ['form-group'],
   attributeBindings: ['start', 'end', 'serverFormat'],
@@ -20,12 +26,12 @@ export default Ember.Component.extend({
 
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: Ember.computed('start', 'end', function() {
+  rangeText: computed('start', 'end', function() {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
     let end = this.get('end');
-    if (!Ember.isEmpty(start) && !Ember.isEmpty(end)) {
+    if (!isEmpty(start) && !isEmpty(end)) {
       return moment(start, serverFormat).format(format) + this.get('separator') +
         moment(end, serverFormat).format(format);
     }
@@ -58,8 +64,16 @@ export default Ember.Component.extend({
 
   // Init the dropdown when the component is added to the DOM
   didInsertElement() {
-    let self = this;
+    this._super(...arguments);
+    this.setupPicker();
+  },
 
+  didUpdateAttrs() {
+    this._super(...arguments);
+    this.setupPicker();
+  },
+
+  getOptions() {
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
     let momentEndDate = moment(this.get('end'), this.get('serverFormat'));
     let startDate = momentStartDate.isValid() ? momentStartDate : undefined;
@@ -105,41 +119,51 @@ export default Ember.Component.extend({
       options.ranges = this.get('ranges');
     }
 
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      this.$('.daterangepicker-input').daterangepicker(options);
-    });
+    return options;
+  },
 
-    this.$('.daterangepicker-input').on('apply.daterangepicker', function(ev, picker) {
-      let start = picker.startDate.format(self.get('serverFormat'));
-      let end = picker.endDate.format(self.get('serverFormat'));
-      let applyAction = self.get('applyAction');
+  setupPicker() {
+    run.cancel(this._setupTimer);
+    this._setupTimer = run.scheduleOnce('afterRender', this, this._setupPicker);
+  },
+
+  _setupPicker() {
+    this.$('.daterangepicker-input').daterangepicker(this.getOptions());
+    this.attachPickerEvents();
+  },
+
+  attachPickerEvents() {
+    this.$('.daterangepicker-input').on('apply.daterangepicker', (ev, picker) => {
+      let start = picker.startDate.format(this.get('serverFormat'));
+      let end = picker.endDate.format(this.get('serverFormat'));
+      let applyAction = this.get('applyAction');
 
       if (applyAction) {
         Ember.assert(
           'applyAction for date-range-picker must be a function',
           typeof applyAction === 'function'
         );
-        self.sendAction('applyAction', start, end);
+        this.sendAction('applyAction', start, end);
       } else {
-        self.setProperties({
+        this.setProperties({
           start, end
         });
       }
     });
 
-    this.$('.daterangepicker-input').on('cancel.daterangepicker', function() {
-      let cancelAction = self.get('cancelAction');
+    this.$('.daterangepicker-input').on('cancel.daterangepicker', () => {
+      let cancelAction = this.get('cancelAction');
 
       if (cancelAction) {
         Ember.assert(
           'cancelAction for date-range-picker must be a function',
           typeof cancelAction === 'function'
         );
-        self.sendAction('cancelAction');
+        this.sendAction('cancelAction');
       } else {
-        self.setProperties({
-          start: self.get('start'),
-          end: self.get('end')
+        this.setProperties({
+          start: this.get('start'),
+          end: this.get('end')
         });
       }
     });
@@ -147,6 +171,10 @@ export default Ember.Component.extend({
 
   // Remove the hidden dropdown when this component is destroyed
   willDestroy() {
+    this._super(...arguments);
+
+    run.cancel(this._setupTimer);
+
     if (this.get('removeDropdownOnDestroy')) {
       Ember.$('.daterangepicker').remove();
     }
