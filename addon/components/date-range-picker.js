@@ -61,6 +61,7 @@ export default Ember.Component.extend({
   customRangeLabel: 'Custom Range',
   fromLabel: 'From',
   toLabel: 'To',
+  hideAction: null,
   applyAction: null,
   cancelAction: null,
   autoUpdateInput: true,
@@ -156,6 +157,24 @@ export default Ember.Component.extend({
           typeof applyAction === 'function'
         );
         this.sendAction('applyAction', start, end);
+      } else {
+        this.setProperties({
+          start, end
+        });
+      }
+    });
+
+    this.$('.daterangepicker-input').on('hide.daterangepicker', (ev, picker) => {
+      let start = picker.startDate.format(this.get('serverFormat'));
+      let end = picker.endDate.format(this.get('serverFormat'));
+      let hideAction = this.get('hideAction');
+
+      if (hideAction) {
+        Ember.assert(
+          'hideAction for date-range-picker must be a function',
+          typeof hideAction === 'function'
+        );
+        this.sendAction('hideAction', start, end);
       } else {
         this.setProperties({
           start, end
