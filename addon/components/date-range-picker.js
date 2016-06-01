@@ -53,8 +53,14 @@ export default Ember.Component.extend({
     'This Month': [moment().startOf('month'), moment().endOf('month')],
     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
   },
+  daysOfWeek: moment.weekdaysMin(),
+  monthNames: moment.monthsShort(),
   removeDropdownOnDestroy: false,
   cancelLabel: 'Cancel',
+  applyLabel: 'Apply',
+  customRangeLabel: 'Custom Range',
+  fromLabel: 'From',
+  toLabel: 'To',
   applyAction: null,
   cancelAction: null,
   autoUpdateInput: true,
@@ -89,9 +95,15 @@ export default Ember.Component.extend({
       autoUpdateInput: this.get('autoUpdateInput'),
       autoApply: this.get('autoApply'),
       locale: {
+        applyLabel: this.get('applyLabel'),
         cancelLabel: this.get('cancelLabel'),
+        customRangeLabel: this.get('customRangeLabel'),
+        fromLabel: this.get('fromLabel'),
+        toLabel: this.get('toLabel'),
         format: this.get('format'),
-        firstDay: this.get('firstDay')
+        firstDay: this.get('firstDay'),
+        daysOfWeek: this.get('daysOfWeek'),
+        monthNames: this.get('monthNames')
       },
       startDate: startDate,
       endDate: endDate,
