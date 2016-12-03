@@ -158,9 +158,11 @@ export default Ember.Component.extend({
         );
         this.sendAction('applyAction', start, end);
       } else {
-        this.setProperties({
-          start, end
-        });
+        if (!this.isDestroyed) {
+          this.setProperties({
+            start, end
+          });
+        }
       }
     });
 
@@ -176,9 +178,11 @@ export default Ember.Component.extend({
         );
         this.sendAction('hideAction', start, end);
       } else {
-        this.setProperties({
-          start, end
-        });
+        if (!this.isDestroyed) {
+          this.setProperties({
+            start, end
+          });
+        }
       }
     });
 
@@ -192,10 +196,11 @@ export default Ember.Component.extend({
         );
         this.sendAction('cancelAction');
       } else {
-        this.setProperties({
-          start: this.get('start'),
-          end: this.get('end')
-        });
+        if (!this.isDestroyed) {
+          this.setProperties({
+            start, end
+          });
+        }
       }
     });
   },
