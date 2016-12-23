@@ -59,6 +59,7 @@ export default Ember.Component.extend({
   cancelLabel: 'Cancel',
   applyLabel: 'Apply',
   customRangeLabel: 'Custom Range',
+  showCustomRangeLabel: false,
   fromLabel: 'From',
   toLabel: 'To',
   hideAction: null,
@@ -93,6 +94,7 @@ export default Ember.Component.extend({
 
     let options = {
       alwaysShowCalendars: this.get('alwaysShowCalendars'),
+      showCustomRangeLabel: this.get('showCustomRangeLabel'),
       autoUpdateInput: this.get('autoUpdateInput'),
       autoApply: this.get('autoApply'),
       locale: {
