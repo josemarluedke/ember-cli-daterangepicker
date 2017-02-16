@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import moment from 'moment';
+import layout from '../../app/templates/components/date-range-picker';
 
 const {
   run,
@@ -8,6 +9,7 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
+  layout,
   classNames: ['form-group'],
   attributeBindings: ['start', 'end', 'serverFormat'],
   start: undefined,
