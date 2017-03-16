@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import moment from 'moment';
+import layout from '../templates/components/date-range-picker';
 
 const {
   run,
@@ -8,6 +9,7 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
+  layout,
   classNames: ['form-group'],
   attributeBindings: ['start', 'end', 'serverFormat'],
   start: undefined,
@@ -59,6 +61,7 @@ export default Ember.Component.extend({
   cancelLabel: 'Cancel',
   applyLabel: 'Apply',
   customRangeLabel: 'Custom Range',
+  showCustomRangeLabel: false,
   fromLabel: 'From',
   toLabel: 'To',
   hideAction: null,
@@ -67,6 +70,7 @@ export default Ember.Component.extend({
   autoUpdateInput: true,
   autoApply: false,
   alwaysShowCalendars: false,
+  context: undefined,
   firstDay: 0,
 
   // Init the dropdown when the component is added to the DOM
@@ -79,6 +83,9 @@ export default Ember.Component.extend({
     this._super(...arguments);
     this.setupPicker();
   },
+
+  isInvalidDate: function(){},
+  isCustomDate: function(){},
 
   getOptions() {
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
@@ -99,6 +106,7 @@ export default Ember.Component.extend({
         applyLabel: this.get('applyLabel'),
         cancelLabel: this.get('cancelLabel'),
         customRangeLabel: this.get('customRangeLabel'),
+        showCustomRangeLabel: this.get('showCustomRangeLabel'),
         fromLabel: this.get('fromLabel'),
         toLabel: this.get('toLabel'),
         format: this.get('format'),
@@ -111,6 +119,8 @@ export default Ember.Component.extend({
       endDate: endDate,
       minDate: minDate,
       maxDate: maxDate,
+      isInvalidDate: this.isInvalidDate.bind(this.context),
+      isCustomDate: this.isCustomDate.bind(this.context),
       timePicker: this.get('timePicker'),
       buttonClasses: this.get('buttonClasses'),
       applyClass: this.get('applyClass'),
