@@ -104,7 +104,8 @@ export default Ember.Component.extend({
         format: this.get('format'),
         firstDay: this.get('firstDay'),
         daysOfWeek: this.get('daysOfWeek'),
-        monthNames: this.get('monthNames')
+        monthNames: this.get('monthNames'),
+        separator: this.get('separator')
       },
       startDate: startDate,
       endDate: endDate,
@@ -114,7 +115,6 @@ export default Ember.Component.extend({
       buttonClasses: this.get('buttonClasses'),
       applyClass: this.get('applyClass'),
       cancelClass: this.get('cancelClass'),
-      separator: this.get('separator'),
       singleDatePicker: this.get('singleDatePicker'),
       drops: this.get('drops'),
       opens: this.get('opens'),
