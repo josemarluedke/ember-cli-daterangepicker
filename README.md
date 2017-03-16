@@ -1,4 +1,4 @@
-# Ember CLI daterangepicker
+# ember-cli-daterangepicker
 
 [![Build Status](https://travis-ci.org/josemarluedke/ember-cli-daterangepicker.svg?branch=master)](https://travis-ci.org/josemarluedke/ember-cli-daterangepicker)
 
@@ -44,6 +44,6 @@ This addon supports many of the same options as the [bootstrap-daterangepicker](
 
 # License
 
-Copyright (c) 2015-2016 Josemar Luedke
+Copyright (c) 2015-2017 Josemar Luedke
 
 Licensed under the [MIT license](LICENSE.md).
