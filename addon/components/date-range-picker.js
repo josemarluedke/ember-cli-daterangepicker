@@ -187,12 +187,12 @@ export default Ember.Component.extend({
 
   handleDateRangePickerEvent(actionName, picker, isCancel = false) {
     let action = this.get(actionName);
-    let attrs = {};
+    let start;
+    let end;
 
     if (!isCancel) {
-      let start = picker.startDate.format(this.get('serverFormat'));
-      let end = picker.endDate.format(this.get('serverFormat'));
-      attrs = { start, end };
+      start = picker.startDate.format(this.get('serverFormat'));
+      end = picker.endDate.format(this.get('serverFormat'));
     }
 
     if (action) {
@@ -200,10 +200,10 @@ export default Ember.Component.extend({
         `${actionName} for date-range-picker must be a function`,
         typeof action === 'function'
       );
-      this.sendAction(actionName, attrs, picker);
+      this.sendAction(actionName, start, end, picker);
     } else {
       if (!this.isDestroyed) {
-        this.setProperties(attrs);
+        this.setProperties({ start, end });
       }
     }
   }
