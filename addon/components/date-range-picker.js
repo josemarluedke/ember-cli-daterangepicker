@@ -109,6 +109,8 @@ export default Ember.Component.extend({
     let minDate = momentMinDate.isValid() ? momentMinDate : undefined;
     let maxDate = momentMaxDate.isValid() ? momentMaxDate : undefined;
 
+    let showCustomRangeLabel = this.get('showCustomRangeLabel');
+
     let options = this.getProperties(
       'isInvalidDate',
       'isCustomDate',
@@ -127,6 +129,7 @@ export default Ember.Component.extend({
       'timePickerIncrement',
       'showWeekNumbers',
       'showDropdowns',
+      'showCustomRangeLabel',
       'linkedCalendars',
       'dateLimit',
       'parentEl'
@@ -136,7 +139,6 @@ export default Ember.Component.extend({
       'applyLabel',
       'cancelLabel',
       'customRangeLabel',
-      'showCustomRangeLabel',
       'fromLabel',
       'toLabel',
       'format',
@@ -148,6 +150,7 @@ export default Ember.Component.extend({
 
     const defaultOptions = {
       locale: localeOptions,
+      showCustomRangeLabel: showCustomRangeLabel,
       startDate: startDate,
       endDate: endDate,
       minDate: minDate,
