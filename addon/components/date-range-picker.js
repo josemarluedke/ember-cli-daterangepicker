@@ -49,10 +49,10 @@ export default Ember.Component.extend({
   applyClass: null,
   cancelClass: null,
   ranges: {
-    'Today': [moment(), moment()],
-    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'Today': [moment().startOf('day'), moment().endOf('day')],
+    'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+    'Last 7 Days': [moment().subtract(7, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(30, 'days'), moment()],
     'This Month': [moment().startOf('month'), moment().endOf('month')],
     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
   },
