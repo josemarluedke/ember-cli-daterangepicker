@@ -1,8 +1,12 @@
-{{#if label}}
-  <label>{{label}}</label>
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if label}}
+    <label>{{label}}</label>
+  {{/if}}
+  {{input value=rangeText class=inputClasses placeholder=placeholder}}
+  <div class="hide">
+    {{input value=start}}
+    {{input value=end}}
+  </div>
 {{/if}}
-{{input value=rangeText class=inputClasses placeholder=placeholder}}
-<div class="hide">
-  {{input value=start}}
-  {{input value=end}}
-</div>
