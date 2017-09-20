@@ -12,7 +12,7 @@ const noop = function() {};
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['form-group'],
+  classNameBindings: ['containerClass'],
   attributeBindings: ['start', 'end', 'serverFormat'],
   start: undefined,
   end: undefined,
@@ -45,6 +45,12 @@ export default Ember.Component.extend({
   separator: ' - ',
   singleDatePicker: false,
   placeholder: null,
+  containerClass: "form-group",
+  inputClass: "form-control",
+  inputClasses: computed('inputClass', function() {
+    let inputClass = this.get('inputClass');
+    return (inputClass ? 'daterangepicker-input ' + inputClass : 'daterangepicker-input');
+  }),
   buttonClasses: ['btn'],
   applyClass: null,
   cancelClass: null,
