@@ -81,6 +81,7 @@ export default Ember.Component.extend({
   firstDay: 0,
   isInvalidDate: noop,
   isCustomDate: noop,
+  customTemplate: null,
 
   // Init the dropdown when the component is added to the DOM
   didInsertElement() {
@@ -116,6 +117,7 @@ export default Ember.Component.extend({
     let maxDate = momentMaxDate.isValid() ? momentMaxDate : undefined;
 
     let showCustomRangeLabel = this.get('showCustomRangeLabel');
+    let customTemplate = this.get('customTemplate');
 
     let options = this.getProperties(
       'isInvalidDate',
@@ -138,7 +140,8 @@ export default Ember.Component.extend({
       'showCustomRangeLabel',
       'linkedCalendars',
       'dateLimit',
-      'parentEl'
+      'parentEl',
+      'customTemplate'
     );
 
     let localeOptions = this.getProperties(
@@ -161,6 +164,7 @@ export default Ember.Component.extend({
       endDate: endDate,
       minDate: minDate,
       maxDate: maxDate,
+      template: customTemplate
     };
 
     if (!this.get('singleDatePicker')) {
