@@ -68,7 +68,7 @@ test('dropdown menu renders', function (assert) {
 test('value changes when choosing Last 7 Days date range', function (assert) {
   let inputText,
     done = assert.async(),
-    dateRange = moment().subtract(6, 'days').format('MMM D, YYYY') + ' - ' + moment().format('MMM D, YYYY');
+    dateRange = moment().subtract(7, 'days').format('MMM D, YYYY') + ' - ' + moment().format('MMM D, YYYY');
 
   assert.expect(2);
 
