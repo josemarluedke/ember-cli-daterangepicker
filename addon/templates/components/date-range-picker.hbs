@@ -1,8 +1,10 @@
 {{#if hasBlock}}
-  {{yield}}
+  {{yield (hash
+    input=(component componentNameInput classNames=dateRangePickerInputClassName placeholder=placeholder)
+  )}}
 {{else}}
   {{#if label}}
     <label>{{label}}</label>
   {{/if}}
-  {{input value=rangeText class=inputClasses placeholder=placeholder}}
+  {{component componentNameInput classNames=dateRangePickerInputClassName placeholder=placeholder}}
 {{/if}}

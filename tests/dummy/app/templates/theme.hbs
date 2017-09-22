@@ -1,13 +1,13 @@
-<h4>Route</h4>
+<h4>Totally Custom Element</h4>
 <div>
   {{#date-range-picker
     start="20140101"
     end="20141231"
     serverFormat="YYYYMMDD"
    as |picker|}}
-    
+
       <label>Awesome Form Label</label>
-      
+
       <div class="input-group">
         {{input value=rangeText class='daterangepicker-input form-control' placeholder=placeholder}}
         <span class="input-group-btn">
@@ -17,3 +17,27 @@
 
   {{/date-range-picker}}
 </div>
+
+<hr/>
+
+<h4>Child Components</h4>
+<div>
+  {{#date-range-picker
+    start="20140101"
+    end="20141231"
+    serverFormat="YYYYMMDD"
+   as |picker|}}
+
+      <label>Awesome Form Label</label>
+
+      <div class="input-group">
+        {{picker.input class='form-control'}}
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button">Search</button>
+        </span>
+      </div>
+
+  {{/date-range-picker}}
+</div>
+
+<hr/>

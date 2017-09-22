@@ -12,23 +12,35 @@ const noop = function() {};
 
 export default Ember.Component.extend({
   layout,
+
   classNameBindings: ['containerClass'],
   attributeBindings: ['start', 'end', 'serverFormat'],
+
+  componentNameInput: 'date-range-picker/input',
+  dateRangePickerInputClassName: 'daterangepicker-input',
+
+  containerClass: "form-group",
+
   start: undefined,
   end: undefined,
+
   minDate: undefined,
   maxDate: undefined,
+
   timePicker: false,
   timePicker24Hour: false,
   timePickerSeconds: false,
   timePickerIncrement: undefined,
+
   showWeekNumbers: false,
   showDropdowns: false,
+
   linkedCalendars: false,
   datelimit: false,
   parentEl: 'body',
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
+
   rangeText: computed('start', 'end', function() {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
@@ -45,12 +57,7 @@ export default Ember.Component.extend({
   separator: ' - ',
   singleDatePicker: false,
   placeholder: null,
-  containerClass: "form-group",
-  inputClass: "form-control",
-  inputClasses: computed('inputClass', function() {
-    let inputClass = this.get('inputClass');
-    return (inputClass ? 'daterangepicker-input ' + inputClass : 'daterangepicker-input');
-  }),
+
   buttonClasses: ['btn'],
   applyClass: null,
   cancelClass: null,
@@ -176,20 +183,24 @@ export default Ember.Component.extend({
   },
 
   _setupPicker() {
-    this.$('.daterangepicker-input').daterangepicker(this.getOptions());
+    const className = this.dateRangePickerInputClassName;
+    this.$(`.${className}`).daterangepicker(this.getOptions());
     this.attachPickerEvents();
   },
 
   attachPickerEvents() {
-    this.$('.daterangepicker-input').on('apply.daterangepicker', (ev, picker) => {
+    const className = this.dateRangePickerInputClassName;
+    const selector = `.${className}`;
+
+    this.$(selector).on('apply.daterangepicker', (ev, picker) => {
       this.handleDateRangePickerEvent('applyAction', picker);
     });
 
-    this.$('.daterangepicker-input').on('hide.daterangepicker', (ev, picker) => {
+    this.$(selector).on('hide.daterangepicker', (ev, picker) => {
       this.handleDateRangePickerEvent('hideAction', picker);
     });
 
-    this.$('.daterangepicker-input').on('cancel.daterangepicker', () => {
+    this.$(selector).on('cancel.daterangepicker', () => {
       this.handleDateRangePickerEvent('cancelAction', undefined, true);
     });
   },

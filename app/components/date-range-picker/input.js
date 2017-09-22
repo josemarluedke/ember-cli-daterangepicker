@@ -1,0 +1,1 @@
+export { default } from 'ember-cli-daterangepicker/components/date-range-picker/input';
