@@ -10,17 +10,17 @@ var fbTransform = require('fastboot-transform');
 module.exports = {
   name: 'ember-cli-daterangepicker',
 
-  options: {
-    babel: {
-      plugins: ['transform-object-rest-spread']
-    }
-  },
-
   included() {
     this._super.included.apply(this, arguments);
 
     this.import('vendor/bootstrap-daterangepicker/daterangepicker.js');
     this.import('vendor/bootstrap-daterangepicker/daterangepicker.css');
+  },
+
+  options: {
+    babel: {
+      plugins: ['transform-object-rest-spread'],
+    },
   },
 
   treeForVendor(vendorTree) {
@@ -41,7 +41,7 @@ module.exports = {
         'package',
         'website'
       ].map(function(key) {
-        return new RegExp(key + '\.js$');
+        return new RegExp(key + '\\.js$');
       })
     })));
     trees.push(new Funnel(daterangepickerPath, {

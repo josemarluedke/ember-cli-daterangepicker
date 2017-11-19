@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import moment from 'moment';
-const { run } = Ember;
 const ASYNC_WAIT_TIME = 500;
 
 moduleForComponent('date-range-picker', 'Integration | Component | Date Range Picker', {
@@ -23,10 +22,12 @@ test('input renders with applyAction and cancelAction parameters', function (ass
   assert.expect(1);
 
   this.on('cancel', function () {
+    // eslint-disable-next-line no-console
     console.log('date range change canceled');
   });
 
   this.on('apply', function (startDate, endDate) {
+    // eslint-disable-next-line no-console
     console.log('date range updated:', startDate + ' - ' + endDate);
   });
 
