@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 var path = require('path');
 
@@ -10,14 +10,20 @@ var fbTransform = require('fastboot-transform');
 module.exports = {
   name: 'ember-cli-daterangepicker',
 
-  included: function(app) {
+  included() {
     this._super.included.apply(this, arguments);
 
     this.import('vendor/bootstrap-daterangepicker/daterangepicker.js');
     this.import('vendor/bootstrap-daterangepicker/daterangepicker.css');
   },
 
-  treeForVendor: function(vendorTree) {
+  options: {
+    babel: {
+      plugins: ['transform-object-rest-spread'],
+    },
+  },
+
+  treeForVendor(vendorTree) {
     var trees = [];
     var daterangepickerPath = path.dirname(require.resolve('bootstrap-daterangepicker'));
 
@@ -35,7 +41,7 @@ module.exports = {
         'package',
         'website'
       ].map(function(key) {
-        return new RegExp(key + '\.js$');
+        return new RegExp(key + '\\.js$');
       })
     })));
     trees.push(new Funnel(daterangepickerPath, {
