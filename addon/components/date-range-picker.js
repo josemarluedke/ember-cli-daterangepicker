@@ -53,6 +53,8 @@ export default Component.extend({
   buttonClasses: ['btn'],
   applyClass: null,
   cancelClass: null,
+  labelClass: null,
+  direction: 'ltr',
   ranges: {
     'Today': [moment().startOf('day'), moment().endOf('day')],
     'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
@@ -144,13 +146,14 @@ export default Component.extend({
       'applyLabel',
       'cancelLabel',
       'customRangeLabel',
-      'fromLabel',
-      'toLabel',
-      'format',
-      'firstDay',
       'daysOfWeek',
+      'direction',
+      'firstDay',
+      'format',
+      'fromLabel',
       'monthNames',
-      'separator'
+      'separator',
+      'toLabel'
     );
 
     const defaultOptions = {
