@@ -63,7 +63,7 @@ test('dropdown menu renders', function (assert) {
     <div id="wrapper">{{date-range-picker parentEl='#wrapper'}}</div>
   `);
 
-  assert.equal(this.$('.daterangepicker.dropdown-menu').length, 1, 'did not render');
+  assert.equal(this.$('.daterangepicker').length, 1, 'did not render');
 });
 
 test('value changes when choosing Last 7 Days date range', function (assert) {
@@ -76,19 +76,18 @@ test('value changes when choosing Last 7 Days date range', function (assert) {
   this.render(hbs `
     <div id="wrapper">
     {{date-range-picker
-      start="20160102"
-      end="20160228"
+      start="2016-01-02"
+      end="2016-02-28"
       parentEl="#wrapper"
     }}</div>
   `);
-
   assert.equal(this.$('.daterangepicker-input').val(), 'Jan 2, 2016 - Feb 28, 2016', 'date range did not match');
 
   // open dropdown
   this.$('.daterangepicker-input').click();
 
   run.later(() => {
-    this.$('.dropdown-menu .ranges ul > li:nth-child(3)').click();
+    this.$('.daterangepicker .ranges ul > li:nth-child(3)').click();
     inputText = this.$('.daterangepicker-input').val();
     assert.equal(inputText, dateRange, 'new date range did not match');
     done();
@@ -102,7 +101,7 @@ test('calendar renders with expected date parameters', function (assert) {
   this.start = '20140101';
   this.end = '20141231';
 
-  assert.expect(4);
+  assert.expect(3);
 
   this.render(hbs `
     <div id="wrapper">
@@ -116,17 +115,14 @@ test('calendar renders with expected date parameters', function (assert) {
     </div>
   `);
 
-  assert.equal(this.$('.dropdown-menu').hasClass('show-calendar'), false, 'dropdown menu has show-calendar class');
+  assert.equal(this.$('.daterangepicker').hasClass('show-calendar'), false, 'dropdown menu has show-calendar class');
 
   // open drowdown
   this.$('.daterangepicker-input').click();
 
   run.later(() => {
-    assert.equal(this.$('.dropdown-menu').hasClass('show-calendar'), true, 'dropdown menu doesnt have show-calendar class');
-
-    assert.equal(this.$('.calendar.left .daterangepicker_input input').val(), this.get('start'), 'start date in calendar input does not match');
-
-    assert.equal(this.$('.calendar.right .daterangepicker_input input').val(), this.get('end'), 'end date in calendar input does not match');
+    assert.equal(this.$('.daterangepicker').hasClass('show-calendar'), true, 'dropdown menu doesnt have show-calendar class');
+    assert.equal(this.$('.daterangepicker-input').val(), `${this.get('start')} - ${this.get('end')}`, 'start date in calendar input does not match');
 
     done();
   }, ASYNC_WAIT_TIME);

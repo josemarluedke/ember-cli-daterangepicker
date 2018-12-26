@@ -13,8 +13,8 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    this.import('vendor/bootstrap-daterangepicker/daterangepicker.js');
-    this.import('vendor/bootstrap-daterangepicker/daterangepicker.css');
+    this.import('vendor/daterangepicker/daterangepicker.js');
+    this.import('vendor/daterangepicker/daterangepicker.css');
   },
 
   options: {
@@ -25,7 +25,7 @@ module.exports = {
 
   treeForVendor(vendorTree) {
     var trees = [];
-    var daterangepickerPath = path.dirname(require.resolve('bootstrap-daterangepicker'));
+    var daterangepickerPath = path.dirname(require.resolve('daterangepicker'));
 
     if (vendorTree) {
       trees.push(vendorTree);
@@ -33,7 +33,7 @@ module.exports = {
 
     //need to wrap with check if it's inside fastboot environment
     trees.push(fbTransform(new Funnel(daterangepickerPath, {
-      destDir: 'bootstrap-daterangepicker',
+      destDir: 'daterangepicker',
       include: [new RegExp(/\.js$/)],
       exclude: [
         'moment',
@@ -45,7 +45,7 @@ module.exports = {
       })
     })));
     trees.push(new Funnel(daterangepickerPath, {
-      destDir: 'bootstrap-daterangepicker',
+      destDir: 'daterangepicker',
       include: [new RegExp(/\.css$/)]
     }));
 

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/josemarluedke/ember-cli-daterangepicker.svg?branch=master)](https://travis-ci.org/josemarluedke/ember-cli-daterangepicker)
 
-Just a simple component to use [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker).
+Just a simple component to use [daterangepicker](https://github.com/dangrossman/daterangepicker).
 
 ## Installation
 
@@ -23,7 +23,7 @@ ember install ember-cli-daterangepicker
 }}
 ```
 
-This addon supports many of the same options as the [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker) library. These options are documented here: [http://www.daterangepicker.com/#options](http://www.daterangepicker.com/#options). Open up an issue if you find an option that does not work with this addon.
+This addon supports many of the same options as the [daterangepicker](https://github.com/dangrossman/daterangepicker) library. These options are documented here: [http://www.daterangepicker.com/#options](http://www.daterangepicker.com/#options). Open up an issue if you find an option that does not work with this addon.
 
 `applyAction`, `hideAction`, and `cancelAction` will bubble up to the named function on nearest controller, etc, like normal. All are optional, but you won't have any way to get your date if you don't specify an `applyAction`.
 

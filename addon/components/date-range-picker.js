@@ -108,6 +108,7 @@ export default Component.extend({
   getOptions() {
     let momentStartDate = moment(this.get('start'), this.get('serverFormat'));
     let momentEndDate = moment(this.get('end'), this.get('serverFormat'));
+
     let startDate = momentStartDate.isValid() ? momentStartDate : undefined;
     let endDate = momentEndDate.isValid() ? momentEndDate : undefined;
 
