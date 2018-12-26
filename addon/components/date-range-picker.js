@@ -17,6 +17,8 @@ export default Component.extend({
   end: undefined,
   minDate: undefined,
   maxDate: undefined,
+  minYear: undefined,
+  minYear: undefined,
   timePicker: false,
   timePicker24Hour: false,
   timePickerSeconds: false,
@@ -139,7 +141,9 @@ export default Component.extend({
       'showCustomRangeLabel',
       'linkedCalendars',
       'dateLimit',
-      'parentEl'
+      'parentEl',
+      'minYear',
+      'maxYear'
     );
 
     let localeOptions = this.getProperties(
