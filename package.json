@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-daterangepicker",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Ember CLI date range picker component",
   "keywords": [
     "ember-addon"
@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "daterangepicker": "^3.0.3",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^2.0.0",
+    "daterangepicker": "^3.0.3",
     "ember-cli-babel": "^6.9.2",
     "ember-cli-htmlbars": "^2.0.3",
     "ember-cli-import-polyfill": "^0.2.0",
