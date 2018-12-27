@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "bootstrap-daterangepicker": "^2.1.25",
+    "daterangepicker": "^3.0.3",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^2.0.0",
     "ember-cli-babel": "^6.9.2",
