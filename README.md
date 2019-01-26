@@ -4,6 +4,13 @@
 
 Just a simple component to use [daterangepicker](https://github.com/dangrossman/daterangepicker).
 
+## :exclamation: Important notice
+
+The use of this addon is **no longer recommended**. This addon is a very simple
+wrapper for another JS library that requires `jQuery` and `moment.js`.
+
+Another more modern option for building powerful calendar is [`ember-power-calendar`](https://github.com/cibernox/ember-power-calendar).
+
 ## Installation
 
 ```
