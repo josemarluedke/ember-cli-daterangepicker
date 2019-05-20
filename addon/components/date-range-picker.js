@@ -218,7 +218,7 @@ export default Component.extend({
         `${actionName} for date-range-picker must be a function`,
         typeof action === 'function'
       );
-      this.sendAction(actionName, start, end, picker);
+      this.get(actionName)(start, end, picker);
     } else {
       if (!this.isDestroyed) {
         this.setProperties({ start, end });
