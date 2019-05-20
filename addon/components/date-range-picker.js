@@ -28,14 +28,19 @@ export default Component.extend({
   parentEl: 'body',
   format: 'MMM D, YYYY',
   serverFormat: 'YYYY-MM-DD',
-  rangeText: computed('start', 'end', function() {
+  rangeText: computed('start', 'end', 'singleDatePicker', function() {
     let format = this.get('format');
     let serverFormat = this.get('serverFormat');
     let start = this.get('start');
     let end = this.get('end');
+    let singleDatePicker = this.get('singleDatePicker');
     if (!isEmpty(start) && !isEmpty(end)) {
-      return moment(start, serverFormat).format(format) + this.get('separator') +
-        moment(end, serverFormat).format(format);
+      if (singleDatePicker) {
+        return moment(start, serverFormat).format(format);
+      else {
+        return moment(start, serverFormat).format(format) + this.get('separator') +
+          moment(end, serverFormat).format(format);
+      }
     }
     return '';
   }),
