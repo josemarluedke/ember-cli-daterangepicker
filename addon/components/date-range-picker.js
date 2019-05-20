@@ -44,6 +44,7 @@ export default Component.extend({
   separator: ' - ',
   singleDatePicker: false,
   placeholder: null,
+  autocomplete: 'off',
   containerClass: "form-group",
   inputClass: "form-control",
   inputClasses: computed('inputClass', function() {
