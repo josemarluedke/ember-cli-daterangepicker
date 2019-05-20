@@ -37,7 +37,7 @@ export default Component.extend({
     if (!isEmpty(start) && !isEmpty(end)) {
       if (singleDatePicker) {
         return moment(start, serverFormat).format(format);
-      else {
+      } else {
         return moment(start, serverFormat).format(format) + this.get('separator') +
           moment(end, serverFormat).format(format);
       }
